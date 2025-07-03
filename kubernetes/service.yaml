@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mybook
+  labels:
+    app: mybook
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: mybook

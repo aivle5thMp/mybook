@@ -1,0 +1,14 @@
+/usr/src/src/main/java/mp/infra/MyBookHateoasProcessor.java
+/usr/src/src/main/java/mp/MybookApplication.java
+/usr/src/src/main/java/mp/infra/BookViewRepository.java
+/usr/src/src/main/java/mp/infra/AbstractEvent.java
+/usr/src/src/main/java/mp/domain/MyBook.java
+/usr/src/src/main/java/mp/infra/MyBookController.java
+/usr/src/src/main/java/mp/infra/dto/PurchaseRequest.java
+/usr/src/src/main/java/mp/config/kafka/KafkaProcessor.java
+/usr/src/src/main/java/mp/domain/BookView.java
+/usr/src/src/main/java/mp/infra/PolicyHandler.java
+/usr/src/src/main/java/mp/domain/MyBookRepository.java
+/usr/src/src/main/java/mp/domain/BookRead.java
+/usr/src/src/main/java/mp/domain/BookPurchased.java
+/usr/src/src/main/java/mp/infra/BookViewViewHandler.java
