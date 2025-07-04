@@ -1,15 +1,16 @@
 package mp.infra.dto;
 
+import java.util.UUID;
 import lombok.Data;
 
 @Data
 public class PurchaseRequest {
-    private String userId;
-    private String bookId;
-    private int pointUsed;
-    private boolean isSubscribed;
-
-    // getter/setter
+    private UUID bookId;
+    private Integer point;
+    private String title;
+    private String authorName;
+    private String category;
+    private String imageUrl;
 }
 
 

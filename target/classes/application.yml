@@ -1,30 +1,7 @@
-server:
-  port: 8085
-
 spring:
+  profiles: docker
   application:
     name: mybook
-
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
@@ -36,62 +13,51 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
-  cloud:
-    stream:
-      kafka:
-        binder:
-          brokers: localhost:9092
-        streams:
-          binder:
-            configuration:
-              default:
-                key:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                value:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      bindings:
-        event-in:
-          group: mybook
-          destination: mp
-          contentType: application/json
-        event-out:
-          destination: mp
-          contentType: application/json
+server:
+  port: 8085
+
+datasource:
+  url: jdbc:h2:mem:mybookdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+  driver-class-name: org.h2.Driver
+  username: sa
+  password:
+
+jpa:
+  hibernate:
+    ddl-auto: update
+  properties:
+    hibernate:
+      show_sql: true
+      format_sql: true
+      use_sql_comments: true
+    database-platform: org.hibernate.dialect.H2Dialect
+
+h2:
+  console:
+    enabled: true
+    path: /h2-console
+    settings:
+      web-allow-others: true
+
+books:
+  service-url: http://localhost:8084
 
 logging:
   level:
-    org.hibernate.type: trace
-    org.springframework.kafka: debug
+    root: INFO
+    mp: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+    org.springframework.transaction: TRACE
 
 ---
-
 spring:
   profiles: docker
-
-server:
-  port: 8085
----
-spring:
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:mybookdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     driver-class-name: org.h2.Driver
     username: sa
     password:
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
   kafka:
     bootstrap-servers: my-kafka:9092
     consumer:
@@ -103,32 +69,8 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
-  cloud:
-    stream:
-      kafka:
-        binder:
-          brokers: my-kafka:9092
-        streams:
-          binder:
-            configuration:
-              default:
-                key:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-                value:
-                  serde: org.apache.kafka.common.serialization.Serdes$StringSerde
-      bindings:
-        event-in:
-          group: mybook
-          destination: mp
-          contentType: application/json
-        event-out:
-          destination: mp
-          contentType: application/json
-
-logging:
-  level:
-    org.hibernate.type: trace
-    org.springframework.kafka: debug
+books:
+  service-url: http://gateway:8089
 
 
 

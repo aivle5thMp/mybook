@@ -1,11 +1,11 @@
 package mp.infra.dto;
 
+import java.util.UUID;
 import lombok.Data;
 
 @Data
 public class BookReadRequest {
-    private String userId;
-    private String bookId;
+    private UUID bookId;
 }
 
 

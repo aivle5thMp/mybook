@@ -1,0 +1,13 @@
+mp/infra/AbstractEvent.class
+mp/domain/MyBookRepository.class
+mp/infra/dto/BookReadRequest.class
+mp/infra/config/KafkaConfig.class
+mp/domain/MyBook.class
+mp/infra/MyBookController.class
+mp/infra/config/RestTemplateConfig.class
+mp/infra/dto/PurchaseRequest.class
+mp/infra/AbstractEvent$1.class
+mp/infra/dto/BookHistoryResponse.class
+mp/MybookApplication.class
+mp/util/UserHeaderUtil.class
+mp/domain/BookPurchased.class

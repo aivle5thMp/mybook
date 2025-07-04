@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.transaction.support.TransactionSynchronization;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -34,9 +35,10 @@ public abstract class AbstractEvent {
     }
 
     public void publish() {
+        @SuppressWarnings("unchecked")
         KafkaTemplate<String, Object> kafkaTemplate =
-                MybookApplication.applicationContext.getBean(KafkaTemplate.class);
-        kafkaTemplate.send("mp", this);
+                (KafkaTemplate<String, Object>) MybookApplication.applicationContext.getBean(KafkaTemplate.class);
+        kafkaTemplate.send("book.purchased.v1", this);
     }
 
     public void publishAfterCommit() {

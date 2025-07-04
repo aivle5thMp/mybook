@@ -1,34 +1,29 @@
 package mp.domain;
 
-import java.util.Date;
-import lombok.*;
-import mp.domain.MyBook;
+import java.util.UUID;
+import lombok.Data;
 import mp.infra.AbstractEvent;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//<<< DDD / Domain Event
 @Data
-@ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BookPurchased extends AbstractEvent {
-
     private Long id;
-    private String userId;
-    private String bookId;
+    private UUID userId;
+    private UUID bookId;
     private Integer point;
-    private Date purchaseDate;
+    private String title;
+    private String authorName;
+    private String category;
+    private String imageUrl;
 
     public BookPurchased(MyBook aggregate) {
         super(aggregate);
-        this.id = aggregate.getId();
-        this.userId = aggregate.getUserId();
-        this.bookId = aggregate.getBookId();
-        this.point = aggregate.getUsedPoints();
-        this.purchaseDate = aggregate.getCreatedAt();
     }
 
     public BookPurchased() {
         super();
     }
 }
-//>>> DDD / Domain Event
 
 
